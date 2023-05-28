@@ -1,1 +1,3 @@
 # memory-control-docker
+
+O objetivo deste script é solucionar um problema que tenho enfrentado com meus servidores Docker. Ocorre que, em algumas situações, um ou mais serviços acabam consumindo muita memória, o que resulta no desligamento do servidor. Como não posso aumentar a capacidade da minha VM atual devido a restrições de custo, a solução encontrada foi criar uma lista de prioridades para os containers e desligar aqueles que têm menos impacto em caso de sobrecarga de memória.
