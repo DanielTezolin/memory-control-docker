@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Caminho para o script
-local_path= $(pwd)
+local_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 script_path="$local_path/check_memory.sh"
 
 # Verifica se o cron job já está configurado
