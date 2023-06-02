@@ -15,7 +15,7 @@ function get_memory_usage {
 # Função para desligar os stacks da lista predefinida
 function stop_stacks {
   for stack in "${stacks_desligar[@]}"; do
-    # docker stack rm "$stack"
+    docker stack rm "$stack"
     echo "Stack $stack foi desligado" >> ./log/log-$date.log
   done
 }
@@ -35,19 +35,6 @@ function check_memory {
   fi
 }
 
-# Função para enviar uma requisição HTTP com um JSON
-function send_http_request {
-  # Define o JSON a ser enviado
-  local json='{"message": "O uso da memória ('"$uso_memoria"'%) está acima do limite ('"$limite_memoria"'%)"}'
-
-  # Envia a requisição HTTP com o JSON
-  curl -H "Content-Type: application/json" -X POST -d "$json" http://exemplo.com/api/endpoint
-}
-
-# Caminho para o script
-local_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-script_path="$local_path/check_memory.sh"
-
 # Data e hora atual
 date=$(date +"%d-%m-%Y-%H-%M")
 
@@ -59,8 +46,3 @@ create_log_directory
 
 # Verifica o uso da memória e desliga os stacks, se necessário
 check_memory
-
-# Envia uma requisição HTTP com um JSON, se necessário
-if [[ $uso_memoria > $limite_memoria ]]; then
-  send_http_request
-fi
